@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,9 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = {
-    'room': 'outside'
-}
+player = Player('outside')
 
 # Write a loop that:
 #
@@ -53,8 +52,57 @@ player = {
 #
 # If the user enters "q", quit the game.
 
-location = player['room']
+location = player.room
+print('\n')
 print(room[location])
+print('\n')
 move = input('What direction do you want to go? (North, South, East, West, or quit) ')
 
+while not move == 'quit':
+    if location == 'outside':
+        if move == 'North':
+            player.room = 'foyer'
+        elif move == 'South' or 'East' or 'West':
+            print(f'\n You cannot move {move}')
+        else:
+            print(f'\n I dont understand {move}, please select again.')
+    elif location == 'foyer':
+        if move == 'North':
+            player.room = 'overlook'
+        elif move == 'South':
+            player.room = 'outside'
+        elif move == 'East':
+            player.room = 'narrow'
+        elif move == 'West':
+            print(f'\n You cannot move {move}')
+        else:
+            print(f'\n I dont understand {move}, please select again.')
+    elif location == 'overlook':
+        if move == 'South':
+            player.room = 'foyer'
+        elif move == 'North' or 'East' or 'West':
+            print(f'\n You cannot move {move}')
+        else:
+            print(f'\n I dont understand {move}, please select again.')
+    elif location == 'narrow':
+        if move == 'North':
+            player.room = 'treasure'
+        elif move == 'West':
+            player.room = 'foyer'
+        elif move == 'South' or 'East':
+            print(f'\n You cannot move {move}')
+        else:
+            print(f'\n I dont understand {move}, please select again.')
+    elif location == 'treasure':
+        if move == 'South':
+            player.room = 'narrow'
+        elif move == 'North' or 'East' or 'West':
+            print(f'\n You cannot move {move}')
+        else:
+            print(f'\n I dont understand {move}, please select again.')
 
+    location = player.room
+    print('\n')
+    print(room[location])
+    print('\n')
+    move = input('What direction do you want to go? (North, South, East, West, or quit) ')
