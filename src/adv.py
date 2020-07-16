@@ -54,7 +54,7 @@ player = Player('outside')
 #
 # If the user enters "q", quit the game.
 
-location = player.room
+location = player.current_room
 print('\n')
 print(room[location])
 print('\n')
@@ -63,47 +63,47 @@ move = input('What direction do you want to go? (North, South, East, West, or qu
 while not move == 'quit':
     if location == 'outside':
         if move == 'North':
-            player.room = 'foyer'
-        elif move == 'South' or 'East' or 'West':
+            player.current_room = 'foyer'
+        elif move == 'South' or move == 'East' or move == 'West':
             print(f'\n You cannot move {move}')
         else:
             print(f'\n I dont understand {move}, please select again.')
     elif location == 'foyer':
         if move == 'North':
-            player.room = 'overlook'
+            player.current_room = 'overlook'
         elif move == 'South':
-            player.room = 'outside'
+            player.current_room = 'outside'
         elif move == 'East':
-            player.room = 'narrow'
+            player.current_room = 'narrow'
         elif move == 'West':
             print(f'\n You cannot move {move}')
         else:
             print(f'\n I dont understand {move}, please select again.')
     elif location == 'overlook':
         if move == 'South':
-            player.room = 'foyer'
-        elif move == 'North' or 'East' or 'West':
+            player.current_room = 'foyer'
+        elif move == 'North' or move == 'East' or move == 'West':
             print(f'\n You cannot move {move}')
         else:
             print(f'\n I dont understand {move}, please select again.')
     elif location == 'narrow':
         if move == 'North':
-            player.room = 'treasure'
+            player.current_room = 'treasure'
         elif move == 'West':
-            player.room = 'foyer'
-        elif move == 'South' or 'East':
+            player.current_room = 'foyer'
+        elif move == 'South' or move == 'East':
             print(f'\n You cannot move {move}')
         else:
             print(f'\n I dont understand {move}, please select again.')
     elif location == 'treasure':
         if move == 'South':
-            player.room = 'narrow'
-        elif move == 'North' or 'East' or 'West':
+            player.current_room = 'narrow'
+        elif move == 'North' or move == 'East' or move == 'West':
             print(f'\n You cannot move {move}')
         else:
             print(f'\n I dont understand {move}, please select again.')
 
-    location = player.room
+    location = player.current_room
     print('\n')
     print(room[location])
     print('\n')
