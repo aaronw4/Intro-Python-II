@@ -7,4 +7,4 @@ class Room:
         self.description = description
         self.items = items
     def __str__(self):
-        return f'{self.name}: {self.description}'
+        return f'Your location is {self.name}: {self.description}. \n There is a {self.items}'
