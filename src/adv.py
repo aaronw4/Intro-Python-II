@@ -49,7 +49,11 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player('outside')
+player = Player('outside', ())
+
+def take(item, location):
+    player.items.append(item)
+    room[location].remove(item)
 
 # Write a loop that:
 #
@@ -66,7 +70,26 @@ location = player.current_room
 print('\n')
 print(room[location])
 print('\n')
-move = input('What direction do you want to go? (North, South, East, West, or quit) ')
+command = input('What direction do you want to go? (North, South, East, West, or quit) \nYou can also "take" or "drop" items.\n')
+
+commandSplit = command.split()
+finished = False
+
+while finished == False:
+    if commandSplit.__len__() == 1:
+        move = command 
+        finished = True
+    elif commandSplit.__len__() == 2:
+        action = commandSplit
+        finished = True
+    else:
+        print('\n')
+        print(f'\n I dont understand "{command}", please select again.')
+        print('\n')
+        print(room[location])
+        print('\n')
+        command = input('What direction do you want to go? (North, South, East, West, or quit) \nYou can also "take" or "drop" items.\n')
+        commandSplit = command.split()
 
 while not move == 'quit':
     if location == 'outside':
@@ -115,4 +138,4 @@ while not move == 'quit':
     print('\n')
     print(room[location])
     print('\n')
-    move = input('What direction do you want to go? (North, South, East, West, or quit) ')
+    move = input('What direction do you want to go? (North, South, East, West, or quit) \nYou can also "take" or "drop" items.\n')
